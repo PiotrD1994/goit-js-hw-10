@@ -6,7 +6,7 @@ export function fetchBreeds() {
     return fetch("https://api.thecatapi.com/v1/breeds")
     .then(response => {
      if (!response.ok) {
-         throw new Error(response.status)
+         throw new Error("Oops! Something went wrong! Try reloading the page!")
      }
      return response.json()
     })
@@ -18,15 +18,26 @@ export function fetchBreeds() {
 })
  }
 
- export function fetchCatByBreed(breedID) {
-    return fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedID}`)
+export function fetchCatByBreed(breedId) {
+    return fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
     .then(response => {
-        if(!response.ok) {
-            throw new Error ("Failed to fetch cat information")
+        if (!response.ok){
+            throw new Error("Oops! Something went wrong! Try reloading the page!")
         }
         return response.json()
     })
     .then(data => {
-        return data[0]
+        if (data.length > 0){
+            const catData = data[0]
+      return {
+        name: catData.breeds[0].name,
+        description: catData.breeds[0].description,
+        temperament: catData.breeds[0].temperament,
+        image: catData.url
+        }
+    } else {
+            throw new Error("No cat data found for this breed")
+        }
     })
- }
+}
+

@@ -6,30 +6,30 @@ const breedSelect = document.querySelector('.breed-select');
 const loader = document.querySelector('.loader');
 const catInfo = document.querySelector('.cat-info');
 const errorMessage = document.querySelector('.error')
+const selectedBreedId = breedSelect.value
 
-fetchBreeds()
-.then(breeds => {
-    breeds.forEach(breed => {
-        const option = document.createElement("option")
-        option.value = breed.id
-        option.textContent = breed.name
-        breedSelect.appendChild(option)
-    })
-    breedSelect.addEventListener("change", event => {
-        const selectedBreedId = event.target.value
-        loader.style.display = "block"
-        catInfo.style.display = "none"
-        fetchCatByBreed(selectedBreedId)
-        .then(CatData => {
-            catInfo.innerHTML = `
-            <img src="${catData.url}" alt="Cat Image">
-            <h3>${catData.breeds[0].name}</h3>
-            <p><strong>Description:</strong> ${catData.breeds[0].description}</p>
-            <p><strong>Temperament:</strong> ${catData.breeds[0].temperament}</p>
-        `
-        })
-    })
-}).catch(error => {
-    loader.style.display = "none"
-    error.style.display = "block"
+fetchBreeds().then(breeds => {
+    for (let i = 0; i < breeds.length; i++) {
+        const breed = breeds[i]
+        const options = document.createElement('option')
+        options.value = breeds.id
+        options.textContent = breed.name
+        breedSelect.appendChild(options)
+    }
 })
+
+breedSelect.addEventListener('change', selectedBreedId)
+
+function selectedBreedId() {
+    fetchCatByBreed().then(catData)
+    const markup = catData.map((catDataOne => {
+        return `<div>
+        <img src="${catDataOne.url}" alt="${catDataOne.name}">
+        <h1>${catDataOne.name}</h1>
+        <p>${catDataOne.description}</p>
+        <p>${catDataOne.temperament}</p>
+        </div>`
+    }).join(""))
+    catInfo.innerHTML = markup
+}
+
