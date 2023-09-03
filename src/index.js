@@ -24,7 +24,6 @@ fetchBreeds().then(breeds => {
   Notify.failure('Oops! Something went wrong! Try reloading the page!', {clickToClose: true})
 });
 
-
 breedSelect.addEventListener('change', chosenCat)
 
 
@@ -33,3 +32,5 @@ function chosenCat(event) {
     const breedId = event.target.value;
     fetchCatByBreed(breedId)
 }
+
+     
