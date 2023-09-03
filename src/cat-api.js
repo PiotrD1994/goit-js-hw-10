@@ -27,7 +27,7 @@ export function fetchCatByBreed(breedId) {
     return response.json()  
 
 }).then(data => {
-    return data
+    return data 
 })
 }
 
