@@ -30,7 +30,9 @@ breedSelect.addEventListener('change', chosenCat)
 function chosenCat(event) {
     Loading.circle('Loading data, please wait...');
     const breedId = event.target.value;
-    fetchCatByBreed(breedId)
+    fetchCatByBreed(breedId).then(catData =>{
+        console.log(catData)
+    })
 }
 
      
