@@ -28,5 +28,6 @@ export function fetchCatByBreed(breedId) {
 
 }).then(data => {
     return data
-})}
+})
+}
 
