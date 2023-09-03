@@ -25,6 +25,8 @@ export function fetchCatByBreed(breedId) {
         throw new Error("Oops! Something went wrong! Try reloading the page!")
     }
     return response.json()
+}).then(data => {
+    return data
 })
 }
 
