@@ -37,7 +37,7 @@ function chosenCat(event) {
       console.log(element)
         const {name, description, temperament} = element[0].breeds[0]
         catInfo.innerHTML =` <div>
-        <img src="${element[0].url}" alt="${name}" width="400"/>
+        <img src="${element[0].url}" alt="${name}" width="500"/>
       </div>
       <div>
         <h1>${name}</h1>
