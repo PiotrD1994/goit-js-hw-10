@@ -18,16 +18,16 @@ export function fetchBreeds() {
 }
 
 
-export function fetchCatByBreed(breedId) {
-   return fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
-   .then(response => {
-    if (!response.ok) {
-        throw new Error("Oops! Something went wrong! Try reloading the page!")
-    }
-    return response.json()  
 
-}).then(data => {
-    return data 
-})
-}
+export async function fetchCatByBreed(breedId) {
+    try {
+      return await axios
+        .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
+        .then(response => {
+          return response.data;
+        });
+    } catch (error) {
+      console.log("Oops! Something went wrong! Try reloading the page!");
+    }
+  }
 
